@@ -64,7 +64,7 @@ class User implements
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:read', 'user:write'])]
-    #[Assert\Range(min: 9, max: 16)]
+    #[Assert\Length(min: 9, max: 16)]
     #[Assert\Regex('/^\+998[0-9]{9}$/')]
     private ?string $phone = null;
 
