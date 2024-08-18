@@ -2,20 +2,49 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use App\Controller\UserCreateAction;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiFilter(SearchFilter::class, properties: [
+    'id' => 'exact',
+    'email' => 'partial',
+    'phone' => 'start',
+])]
+#[ApiFilter(OrderFilter::class, properties: ['id','age'])]
+#[ApiFilter(DateFilter::class, properties: ['createdAt'])]
 #[ApiResource(
+    operations: [
+        new GetCollection(),
+        new Post(
+            uriTemplate: 'users/my',
+            controller: UserCreateAction::class,
+            name: 'createUser'
+        ),
+        new Get(),
+        new Delete()
+    ],
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:write']],
+    paginationItemsPerPage: 5
 )]
 #[UniqueEntity('email',message: 'Email {{ value }} already exists')]
-class User
+class User implements
+    PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -25,7 +54,7 @@ class User
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:read', 'user:write'])]
-    #[Assert\NotBlank(message: "Email doesn't be empty")]
+    #[Assert\Email(message: "Email format is invalid")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
