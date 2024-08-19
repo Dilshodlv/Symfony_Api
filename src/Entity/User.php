@@ -16,6 +16,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -35,6 +36,10 @@ use Symfony\Component\Validator\Constraints as Assert;
             controller: UserCreateAction::class,
             name: 'createUser'
         ),
+        new Post(
+          uriTemplate: 'users/auth',
+          name: 'auth'
+        ),
         new Get(),
         new Delete()
     ],
@@ -43,8 +48,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     paginationItemsPerPage: 5
 )]
 #[UniqueEntity('email',message: 'Email {{ value }} already exists')]
-class User implements
-    PasswordAuthenticatedUserInterface
+class User implements PasswordAuthenticatedUserInterface , UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -209,5 +213,15 @@ class User implements
         $this->roles = $roles;
 
         return $this;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return $this->getEmail();
     }
 }
