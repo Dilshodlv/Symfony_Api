@@ -7,6 +7,8 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use App\Controller\GetBooksByCategoryAction;
+use App\Controller\GetBooksByHardExample;
 use App\Repository\BookRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,6 +18,27 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new GetCollection(),
+        new GetCollection(
+          uriTemplate: 'books/by-category',
+            controller: GetBooksByCategoryAction::class,
+            openapiContext: [
+                'parameters' => [
+                    [
+                        'in' => 'query',
+                        'name' => 'categoryId',
+                        'schema' => [
+                            'type' => 'integer',
+                        ]
+                    ]
+                ]
+              ],
+            name: 'getBooks'
+        ),
+        new GetCollection(
+            uriTemplate: 'books/hard-example',
+            controller: GetBooksByHardExample::class,
+            name: 'getBooksByHardExample'
+        ),
         new Post(),
         new Get(),
         new Delete()
