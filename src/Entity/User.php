@@ -3,14 +3,15 @@
 namespace App\Entity;
 
 use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
-use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use App\Controller\AboutMeAction;
 use App\Controller\UserCreateAction;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,19 +27,26 @@ use Symfony\Component\Validator\Constraints as Assert;
     'email' => 'partial',
     'phone' => 'start',
 ])]
-#[ApiFilter(OrderFilter::class, properties: ['id','age'])]
+#[ApiFilter(OrderFilter::class, properties: ['id', 'age'])]
 #[ApiFilter(DateFilter::class, properties: ['createdAt'])]
 #[ApiResource(
     operations: [
-        new GetCollection(),
+        new GetCollection(
+            security: 'is_granted("ROLE_ADMIN")'
+        ),
         new Post(
             uriTemplate: 'users/my',
             controller: UserCreateAction::class,
             name: 'createUser'
         ),
         new Post(
-          uriTemplate: 'users/auth',
-          name: 'auth'
+            uriTemplate: 'users/auth',
+            name: 'auth'
+        ),
+        new GetCollection(
+            uriTemplate: 'users/about_me',
+            controller: AboutMeAction::class,
+            name: 'aboutMe'
         ),
         new Get(),
         new Delete()
@@ -47,8 +55,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     denormalizationContext: ['groups' => ['user:write']],
     paginationItemsPerPage: 5
 )]
-#[UniqueEntity('email',message: 'Email {{ value }} already exists')]
-class User implements PasswordAuthenticatedUserInterface , UserInterface
+#[UniqueEntity('email', message: 'Email {{ value }} already exists')]
+class User implements PasswordAuthenticatedUserInterface, UserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -74,8 +82,8 @@ class User implements PasswordAuthenticatedUserInterface , UserInterface
 
     #[ORM\Column(length: 255)]
     #[Groups(['user:read', 'user:write'])]
-    #[Assert\Choice(choices: ['erkak','ayol'])]
-    #[Assert\NotBlank(message: "Gender doesn't be empty" )]
+    #[Assert\Choice(choices: ['erkak', 'ayol'])]
+    #[Assert\NotBlank(message: "Gender doesn't be empty")]
     private ?string $gender = null;
 
     #[ORM\Column]
@@ -105,18 +113,6 @@ class User implements PasswordAuthenticatedUserInterface , UserInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     public function getPassword(): ?string
@@ -223,5 +219,17 @@ class User implements PasswordAuthenticatedUserInterface , UserInterface
     public function getUserIdentifier(): string
     {
         return $this->getEmail();
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
     }
 }
