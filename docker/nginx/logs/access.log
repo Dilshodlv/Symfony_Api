@@ -468,3 +468,6 @@
 172.19.0.1 - - [20/Aug/2024:17:55:33 +0000] "GET /api HTTP/1.1" 200 36038 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15" "-"
 172.19.0.1 - - [20/Aug/2024:17:55:35 +0000] "GET /api HTTP/1.1" 200 36038 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15" "-"
 172.19.0.1 - - [20/Aug/2024:17:55:36 +0000] "GET /api HTTP/1.1" 200 36038 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15" "-"
+172.19.0.1 - - [21/Aug/2024:07:07:17 +0000] "GET / HTTP/1.1" 404 38767 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Safari/605.1.15" "-"
+172.19.0.1 - - [21/Aug/2024:07:07:17 +0000] "GET /apple-touch-icon-precomposed.png HTTP/1.1" 404 153 "-" "Safari/19618.3.11.11.5 CFNetwork/1498.700.2 Darwin/23.6.0" "-"
+172.19.0.1 - - [21/Aug/2024:07:07:17 +0000] "GET /apple-touch-icon.png HTTP/1.1" 404 153 "-" "Safari/19618.3.11.11.5 CFNetwork/1498.700.2 Darwin/23.6.0" "-"

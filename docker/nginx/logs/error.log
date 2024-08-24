@@ -326,3 +326,42 @@
 2024/08/21 06:32:42 [notice] 1#1: start worker process 33
 2024/08/21 06:32:42 [notice] 1#1: start worker process 34
 2024/08/21 06:32:42 [notice] 1#1: start worker process 35
+2024/08/21 07:07:17 [error] 28#28: *1 FastCGI sent in stderr: "PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".PHP message: [debug] Notified event "kernel.request" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelRequest".PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".PHP message: [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".PHP message: [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://localhost:8605/"" at RouterListener.php line 149PHP message: [debug] Notified event "kernel.exception" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::logKernelException".PHP message: [debug] Notified event "kernel.exception" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelException".PHP message: [debug] Listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelException" stopped propagation of the event "kernel.exception".PHP message: [debug] Listener "ApiPlatform\Symfony\EventListener\ExceptionListener::onKernelException" was not called for event "kernel.exception".PHP message: [debug] Listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onKernelException" was not called for event "kernel.exception".PHP message: [debug] Notified event "kernel.response" to listener "Nelmio\CorsBundle\EventListener\CorsListener::onKernelResponse".PHP message: [debug] Notified event "kernel.response" to listene
+2024/08/21 07:07:24 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2024/08/21 07:07:24 [notice] 28#28: gracefully shutting down
+2024/08/21 07:07:24 [notice] 30#30: gracefully shutting down
+2024/08/21 07:07:24 [notice] 31#31: gracefully shutting down
+2024/08/21 07:07:24 [notice] 34#34: gracefully shutting down
+2024/08/21 07:07:24 [notice] 32#32: gracefully shutting down
+2024/08/21 07:07:24 [notice] 32#32: exiting
+2024/08/21 07:07:24 [notice] 35#35: gracefully shutting down
+2024/08/21 07:07:24 [notice] 35#35: exiting
+2024/08/21 07:07:24 [notice] 33#33: gracefully shutting down
+2024/08/21 07:07:24 [notice] 33#33: exiting
+2024/08/21 07:07:24 [notice] 29#29: gracefully shutting down
+2024/08/21 07:07:24 [notice] 28#28: exiting
+2024/08/21 07:07:24 [notice] 30#30: exiting
+2024/08/21 07:07:24 [notice] 31#31: exiting
+2024/08/21 07:07:24 [notice] 34#34: exiting
+2024/08/21 07:07:24 [notice] 32#32: exit
+2024/08/21 07:07:24 [notice] 35#35: exit
+2024/08/21 07:07:24 [notice] 33#33: exit
+2024/08/21 07:07:24 [notice] 29#29: exiting
+2024/08/21 07:07:24 [notice] 28#28: exit
+2024/08/21 07:07:24 [notice] 30#30: exit
+2024/08/21 07:07:24 [notice] 31#31: exit
+2024/08/21 07:07:24 [notice] 34#34: exit
+2024/08/21 07:07:24 [notice] 29#29: exit
+2024/08/21 07:07:24 [notice] 1#1: signal 17 (SIGCHLD) received from 35
+2024/08/21 07:07:24 [notice] 1#1: worker process 28 exited with code 0
+2024/08/21 07:07:24 [notice] 1#1: worker process 30 exited with code 0
+2024/08/21 07:07:24 [notice] 1#1: worker process 31 exited with code 0
+2024/08/21 07:07:24 [notice] 1#1: worker process 32 exited with code 0
+2024/08/21 07:07:24 [notice] 1#1: worker process 34 exited with code 0
+2024/08/21 07:07:24 [notice] 1#1: worker process 35 exited with code 0
+2024/08/21 07:07:24 [notice] 1#1: signal 29 (SIGIO) received
+2024/08/21 07:07:24 [notice] 1#1: signal 17 (SIGCHLD) received from 30
+2024/08/21 07:07:24 [notice] 1#1: signal 17 (SIGCHLD) received from 29
+2024/08/21 07:07:24 [notice] 1#1: worker process 29 exited with code 0
+2024/08/21 07:07:24 [notice] 1#1: worker process 33 exited with code 0
+2024/08/21 07:07:24 [notice] 1#1: exit
